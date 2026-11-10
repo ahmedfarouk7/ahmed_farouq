@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f6f3ec" />
+  <meta name="description" content="RoomGenius — مشروع تطبيقي جامعي لتصميم الغرف باستخدام الجبر الخطي والرياضيات. برمجة وتصميم أحمد فاروق، كلية الحاسبات والذكاء الاصطناعي بجامعة وادي النيل." />
+  <title>RoomGenius | Interior Design Studio — Ahmed Farouk</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles-academic.css" />
+  <link rel="stylesheet" href="styles-v4.css" />
+</head>
+<body>
+<svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 10h18M10 10v11"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5ZM3 7v10l9 5 9-5V7M12 12v10"/></symbol>
+  <symbol id="i-move" viewBox="0 0 24 24"><path d="m8 4 4-3 4 3M12 1v22m-4-3 4 3 4-3M4 8l-3 4 3 4m-3-4h22m-3-4 3 4-3 4"/></symbol>
+  <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2 6M3 3v8h8"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2ZM7 3v6h10V3M7 21v-9h10v9"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h9a7 7 0 1 1 0 14h-2"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5m5 5h-9a7 7 0 1 0 0 14h2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.9 6.1L20 11l-6.1 1.9L12 19l-1.9-6.1L4 11l6.1-1.9L12 3ZM20 17l.7 2.3L23 20l-2.3.7L20 23l-.7-2.3L17 20l2.3-.7L20 17Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2L12 3Zm0 7v4m0 3v.2"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6m5 4v7m4-7v7"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8v.2"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm9 0v6h5"/></symbol>
+</svg>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark"><svg><use href="#i-layout" /></svg></div>
+      <div class="brand-copy"><strong>Room<span>Genius</span></strong><small>INTERIOR DESIGN STUDIO</small></div>
+      <span class="edition edition-pro">NVU · STUDENT PROJECT</span>
+    </div>
+    <div class="header-project"><span class="project-label">المشروع /</span><input id="projectName" aria-label="اسم المشروع" value="شقتي الجديدة" maxlength="48"/><span class="auto-save"><span class="save-dot"></span> يُحفظ تلقائيًا</span></div>
+    <div class="header-actions">
+      <a href="inspiration.html" class="btn btn-university" title="افتح مكتبة الأفكار"><svg><use href="#i-grid"/></svg><span>مكتبة الأفكار</span></a>
+      <button id="reportBtn" class="btn btn-light" title="ملخص قياسات وتصميم الغرفة">تقرير التصميم</button>
+      <button id="newBtn" class="btn btn-light" title="تصميم جديد"><svg><use href="#i-plus"/></svg><span>جديد</span></button>
+      <button id="saveBtn" class="btn btn-light" title="تنزيل ملف التصميم"><svg><use href="#i-save"/></svg><span>حفظ المشروع</span></button>
+      <button id="exportBtn" class="btn btn-primary"><svg><use href="#i-download"/></svg><span>تصدير PNG</span></button>
+    </div>
+  </header>
+  <main class="workspace">
+    <aside class="sidebar sidebar-catalog">
+      <section class="sidebar-section sidebar-intro">
+        <div class="eyebrow"><span class="pulse-dot"></span> INTERIOR PLANNING STUDIO</div>
+        <h1>كل مساحة<br/><span>لها حكايتها.</span></h1>
+        <p>خطّط غرفتك بالمقاسات، جرّب ترتيب الأثاث وشاهد النتيجة من زوايا مختلفة.</p>
+      </section>
+      <section class="sidebar-section catalog-section">
+        <div class="section-heading"><h2>مكتبة الأثاث</h2><span class="count-pill" id="catalogCount">12 قطعة</span></div>
+        <div class="category-tabs" id="categoryTabs" aria-label="تصنيفات الأثاث">
+          <button class="category-tab active" data-category="all">الكل</button>
+          <button class="category-tab" data-category="seating">الجلوس</button>
+          <button class="category-tab" data-category="sleep">النوم</button>
+          <button class="category-tab" data-category="work">العمل</button>
+          <button class="category-tab" data-category="storage">التخزين</button>
+          <button class="category-tab" data-category="decor">الديكور</button>
+        </div>
+        <label class="catalog-search"><svg><use href="#i-info"/></svg><input id="catalogSearch" type="search" placeholder="ابحث عن أثاث..." aria-label="البحث في مكتبة الأثاث" /></label>
+        <div class="furniture-list" id="furnitureList"></div><p id="catalogEmpty" class="catalog-empty" hidden>لم يتم العثور على أثاث مطابق للبحث.</p><p class="photo-disclaimer">الصور الفوتوغرافية استرشادية وليست صورًا للمجسمات ثلاثية الأبعاد نفسها؛ تتطلب الصور اتصالًا بالإنترنت.</p><a class="model-source-link" href="https://polyhaven.com/models" target="_blank" rel="noopener noreferrer">استكشف مجسمات أثاث حقيقية مجانية (Poly Haven) ↗</a>
+      </section>
+      <section class="sidebar-section tip-card">
+        <div class="tip-icon"><svg><use href="#i-sparkles" /></svg></div>
+        <div><strong>نصيحة للتصميم</strong><p>اضغط على أي قطعة لتعديل المقاسات والزاوية أو اسحبها مباشرة داخل المخطط.</p></div>
+      </section>
+    </aside>
+    <section class="main-panel">
+      <div class="canvas-toolbar">
+        <div class="view-switch" role="group" aria-label="طريقة العرض">
+          <button id="view2D" class="view-button selected"><svg><use href="#i-layout"/></svg> مخطط 2D</button>
+          <button id="view3D" class="view-button"><svg><use href="#i-cube"/></svg> <span>عرض 3D</span></button>
+        </div>
+        <div class="toolbar-right">
+          <button id="measureBtn" class="flow-button" title="قياس المسافة بين نقطتين في المخطط" aria-pressed="false">قياس المسافة</button>
+          <button id="flowBtn" class="flow-button" title="إظهار خريطة الحركة والمساحات القابلة للوصول" aria-pressed="false">مسارات الحركة</button>
+          <button id="gridBtn" class="icon-button active" title="إظهار الشبكة" aria-label="إظهار الشبكة"><svg><use href="#i-grid"/></svg></button>
+          <button id="snapBtn" class="snap-button active" title="محاذاة إلى الشبكة">Snap <span class="key-dot"></span></button>
+          <span class="vertical-divider"></span>
+          <button id="undoBtn" class="icon-button" title="تراجع Ctrl+Z" aria-label="تراجع"><svg><use href="#i-undo"/></svg></button>
+          <button id="redoBtn" class="icon-button" title="إعادة Ctrl+Y" aria-label="إعادة"><svg><use href="#i-redo"/></svg></button>
+          <span class="vertical-divider"></span>
+          <button id="zoomOut" class="icon-button" title="تصغير" aria-label="تصغير"><svg><use href="#i-minus"/></svg></button>
+          <span class="zoom-label" id="zoomLabel">100%</span>
+          <button id="zoomIn" class="icon-button" title="تكبير" aria-label="تكبير"><svg><use href="#i-plus"/></svg></button>
+        </div>
+      </div>
+      <div class="canvas-wrap" id="canvasWrap">
+        <canvas id="designCanvas" aria-label="مخطط الغرفة التفاعلي"></canvas>
+        <div id="threeStage" class="three-stage" hidden>
+          <div class="stage-loading" id="threeLoader"><span class="loader-ring"></span><strong>نجهّز المشهد ثلاثي الأبعاد</strong><small>تحميل محرك العرض والخامات…</small></div>
+          <div class="view-3d-top" id="threeTools">
+            <span class="real-badge"><i></i> LIVE 3D</span>
+            <div class="camera-presets">
+              <button type="button" data-camera="perspective" class="active">منظور</button>
+              <button type="button" data-camera="top">من أعلى</button>
+              <button type="button" data-camera="eye">من داخل الغرفة</button>
+            </div>
+          </div>
+          <div class="view-3d-bottom"><span>اسحب لتدوير الكاميرا · عجلة الماوس للتقريب · اضغط على قطعة لتحديدها</span><button id="shot3d" type="button" title="حفظ صورة للمشهد">تصوير المشهد ↗</button></div>
+        </div>
+        <div class="canvas-top-hint"><span class="live-indicator"></span><span id="canvasModeText">مساحة عمل تفاعلية</span></div>
+        <div class="canvas-bottom-hint" id="canvasHint"><svg><use href="#i-move"/></svg> اسحب القطع للتحريك · اضغط للضبط · Delete للحذف</div>
+      </div>
+      <div class="measure-readout" id="measureReadout" hidden>اختر نقطتين داخل المخطط لقياس المسافة بينهما.</div>
+      <div class="insight-ribbon" id="insightRibbon"><span class="insight-ribbon-icon">✦</span><strong>تحليل المساحة</strong><span id="ribbonText">جارٍ حساب جودة توزيع الأثاث...</span><button id="ribbonToggle" type="button">اعرض المسارات</button></div>
+      <div class="bottom-strip">
+        <div class="stat"><div class="stat-icon orange">▦</div><div><small>مساحة الغرفة</small><strong id="roomArea">28.8 م²</strong></div></div>
+        <div class="stat"><div class="stat-icon blue">▤</div><div><small>المساحة المستخدمة</small><strong id="usedArea">0 م²</strong></div></div>
+        <div class="stat"><div class="stat-icon green">◉</div><div><small>المساحة المتاحة</small><strong id="freeArea">0 م²</strong></div></div><div class="stat budget-stat"><div class="stat-icon blue">ج</div><div><small>ميزانية افتراضية للأثاث</small><strong id="totalBudget">—</strong></div></div>
+        <div class="stat"><div class="stat-icon green">↝</div><div><small>الوصول للمساحة الخالية</small><strong id="walkableStat">—</strong></div></div>
+        <div class="status-pill ok" id="statusPill"><svg><use href="#i-check"/></svg><span>التصميم بدون تداخلات</span></div>
+      </div>
+    </section>
+    <aside class="sidebar sidebar-inspector">
+      <section class="sidebar-section">
+        <div class="section-heading"><h2>إعدادات الغرفة</h2><svg class="muted-icon"><use href="#i-layout"/></svg></div>
+        <div class="room-preset-row" id="roomPresetRow">
+          <button data-room="bedroom" class="preset-btn">غرفة نوم</button>
+          <button data-room="living" class="preset-btn active">معيشة</button>
+          <button data-room="studio" class="preset-btn">مكتب</button>
+        </div>
+        <div class="input-grid">
+          <label class="field">العرض (م)<input id="roomWidth" type="number" min="2" max="15" step="0.1" value="6.0"/></label>
+          <label class="field">الطول (م)<input id="roomHeight" type="number" min="2" max="15" step="0.1" value="4.8"/></label>
+        </div>
+        <div class="door-controls">
+          <div class="section-heading small-heading"><h2>المدخل والممرات</h2><small>قياسات بالمتر</small></div>
+          <div class="input-grid">
+            <label class="field">بداية الباب من اليسار<input id="doorPosition" type="number" min="0" step="0.1" value="0.55" /></label>
+            <label class="field">عرض الباب<input id="doorWidth" type="number" min="0.7" max="1.8" step="0.1" value="0.9" /></label>
+          </div>
+          <small class="field-note">تُستخدم هذه القيم لحجز مساحة الباب وحساب إمكانية الوصول داخل الغرفة.</small>
+        </div>
+      </section>
+      <section class="sidebar-section inspector-section">
+        <div class="section-heading"><h2>خصائص القطعة</h2><span class="small-muted" id="selectionCount">لم يتم التحديد</span></div>
+        <div id="emptyInspector" class="empty-inspector"><div class="empty-illustration">🪑</div><strong>حدد قطعة لتعديلها</strong><p>اضغط على أي قطعة أثاث داخل المخطط لعرض خصائصها.</p></div>
+        <div id="itemInspector" class="item-inspector hidden">
+          <div class="selected-furniture"><div id="selectedEmoji" class="selected-emoji" aria-hidden="true"></div><div><strong id="selectedName">أريكة</strong><small id="selectedCategory">قطعة أثاث</small></div><span class="selected-tag">محدد</span></div>
+          <div class="input-grid">
+            <label class="field">الموضع X (م)<input type="number" step="0.1" id="itemX" /></label>
+            <label class="field">الموضع Y (م)<input type="number" step="0.1" id="itemY" /></label>
+            <label class="field">العرض (م)<input type="number" min="0.2" max="6" step="0.1" id="itemW" /></label>
+            <label class="field">العمق (م)<input type="number" min="0.2" max="6" step="0.1" id="itemD" /></label>
+          </div>
+          <label class="field price-field">سعر القطعة التقريبي (ج.م) — يمكنك تعديله<input type="number" min="0" max="10000000" step="100" id="itemPrice" aria-label="سعر قطعة الأثاث بالجنيه المصري"/></label>
+          <div class="slider-heading"><label for="rotateRange">زاوية الدوران</label><strong id="rotateValue">0°</strong></div>
+          <input id="rotateRange" class="angle-range" type="range" min="0" max="355" step="5" value="0"/>
+          <div class="swatches" id="colorSwatches" aria-label="لون القطعة"></div>
+          <div class="quick-actions"><button id="centerItemBtn" type="button">توسيط القطعة</button><button id="wallAlignBtn" type="button">قرب الحائط</button><button id="quarterTurnBtn" type="button">دوران 90°</button></div>
+          <div class="item-actions"><button id="duplicateBtn" class="btn btn-soft"><svg><use href="#i-copy"/></svg> تكرار</button><button id="deleteBtn" class="btn btn-danger"><svg><use href="#i-trash"/></svg> حذف</button></div>
+        </div>
+      </section>
+      <section class="sidebar-section visual-section">
+        <div class="section-heading"><h2>الهوية والخامات</h2><span class="pro-chip">MATERIALS</span></div>
+        <p class="config-subtitle">غيّر شكل الأرضيات والجدران، وشاهد النتيجة في المشهد.</p>
+        <div class="style-grid" id="designStyles">
+          <button class="style-tile active" data-style="natural"><span class="style-dot natural"></span> طبيعي دافئ</button>
+          <button class="style-tile" data-style="modern"><span class="style-dot modern"></span> عصري</button>
+          <button class="style-tile" data-style="dark"><span class="style-dot dark"></span> فخم</button>
+        </div>
+        <div class="config-title">نوع الأرضية</div>
+        <div class="material-options" id="floorStyles">
+          <button class="material-choice active" data-floor="oak"><span class="material-dot oak"></span> خشب طبيعي</button>
+          <button class="material-choice" data-floor="marble"><span class="material-dot marble"></span> رخام</button>
+          <button class="material-choice" data-floor="concrete"><span class="material-dot concrete"></span> أسمنتي</button>
+        </div>
+        <div class="config-title">الإضاءة <span id="lightLabel">نهارية</span></div>
+        <input id="lightTime" class="light-slider" type="range" min="0" max="100" step="1" value="68" aria-label="الإضاءة من الليل إلى النهار" />
+        <div class="lighting-labels"><span>ليل 🌙</span><span>نهار ☀️</span></div>
+        <div class="option-row"><label><input id="wallToggle" type="checkbox" checked /> إظهار الجدران والنوافذ</label><button id="resetCamera" class="link-mini" type="button">إعادة الكاميرا</button></div>
+        <button class="btn btn-soft wide-btn" id="loadGlb" type="button">＋ استيراد موديل أثاث GLB للقطعة المحددة</button>
+        <input type="file" id="glbInput" accept=".glb,model/gltf-binary" hidden />
+        <small class="real-note">الموديل المرفوع يظهر في المعاينة الحالية فقط ولا يُحفظ ضمن JSON.</small>
+      </section>
+      <section class="sidebar-section math-section">
+        <div class="section-heading"><h2>الرياضيات وراء التصميم</h2><span class="math-tag">APPLIED MATH</span></div>
+        <p class="math-help" id="mathHelp">التغييرات اللي بتعملها بتتحول لحسابات رياضية فعلية.</p>
+        <div class="formula-label">Transformation matrix</div>
+        <div class="matrix-row"><span class="matrix-bracket">[</span><div class="matrix-grid" id="matrixValues"><span>1.00</span><span>0.00</span><span>0.00</span><span>1.00</span></div><span class="matrix-bracket">]</span></div>
+        <div class="math-measures"><div><span>Det(A)</span><strong id="detValue">1.00</strong></div><div><span>Position vector</span><strong id="vectorValue">—</strong></div></div>
+        <p class="math-footnote">المصفوفة تصف الدوران والتمدد، والمحدد يبين معامل تغير المساحة.</p>
+      </section>
+      <section class="sidebar-section optimize-section"><div class="optimize-head"><div class="optimize-spark"><svg><use href="#i-sparkles"/></svg></div><div><strong>مساعدة في ترتيب الأثاث</strong><p>ابحث عن أماكن مناسبة للقطع بعيدًا عن التداخلات.</p></div></div><button id="optimizeBtn" class="btn btn-optimize">اقترح ترتيب جديد <svg><use href="#i-sparkles"/></svg></button><small>اقتراح هندسي تجريبي يعتمد على المقاسات والتداخلات.</small></section>
+      <section class="sidebar-section navigation-health">
+        <div class="section-heading"><h2>مؤشر جودة التوزيع</h2><span class="math-tag">SPACE ANALYSIS</span></div>
+        <div class="health-top"><strong id="healthScore">—</strong><span>درجة مبدئية لجودة المساحة <small>ليست تقييمًا هندسيًا معتمدًا</small></span></div>
+        <div class="health-track"><div id="healthBar" style="width:0%"></div></div>
+        <div id="healthRecommendations" class="health-recommendations" role="status" aria-live="polite"><p>جارٍ تحليل الغرفة...</p></div>
+        <p class="field-note">تُحسب المسارات بشبكة تقريبية لتوضيح تطبيق الخوارزميات والمتجهات، ولا تحل محل مراجعة مختص.</p>
+      </section>
+      <section class="sidebar-section file-actions"><button id="importBtn" class="text-button"><svg><use href="#i-file"/></svg> استيراد مشروع JSON</button><button id="resetBtn" class="text-button"><svg><use href="#i-undo"/></svg> استعادة التصميم التجريبي</button><input id="importInput" type="file" accept=".json,application/json" hidden /></section>
+    </aside>
+  </main>
+
+  <footer class="academic-footer" id="academicCredits" aria-labelledby="academicTitle">
+    <div class="academic-wrap">
+      <div class="academic-kicker"><span class="academic-line"></span><span>كلية الحاسبات والذكاء الاصطناعي · جامعة وادي النيل</span><a href="#" class="back-top">العودة لأعلى ↑</a></div>
+      <div class="academic-main">
+        <div class="academic-story">
+          <div class="university-heading"><div class="crest-frame"><img src="assets/nvu-crest-transparent.png" alt="شعار جامعة وادي النيل NVU المرفق بالمشروع" loading="lazy" /></div><div><span class="eyebrow-light">NILE VALLEY UNIVERSITY</span><p>كلية الحاسبات والذكاء الاصطناعي</p></div></div>
+          <h2 id="academicTitle">من <em>المعادلة</em> إلى<br>مساحة تُصمَّم وتُختبر.</h2>
+          <p class="academic-lead">RoomGenius مشروع جامعي يجمع التصميم الداخلي بالبرمجة، ويُظهر كيف تتحول المتجهات والمصفوفات والقياسات إلى أدوات نستخدمها في تخطيط المساحات.</p>
+          <div class="author-signature"><div class="signature-icon">&lt;/&gt;</div><div><span>برمجة وتصميم وتنفيذ الموقع</span><h3>أحمد فاروق</h3><p>طالب بكلية الحاسبات والذكاء الاصطناعي — جامعة وادي النيل</p></div></div>
+        </div>
+        <div class="leadership-card">
+          <div class="leadership-photo"><img src="assets/dean-ahmed-elnaggar.jpg" alt="الصورة المرفقة للأستاذ الدكتور أحمد النجار في فعالية بالجامعة" loading="lazy" /></div>
+          <div class="leadership-copy"><span class="leadership-label">تحت قيادة وإشراف</span><h3>الأستاذ الدكتور أحمد النجار</h3><p>عميد كلية الحاسبات والذكاء الاصطناعي</p><span class="leadership-rule"></span><small>جامعة وادي النيل · Nile Valley University</small></div>
+        </div>
+      </div>
+      <div class="academic-details">
+        <section class="purpose-panel"><span class="detail-index">01 / فكرة المشروع</span><h3>من النظري إلى العملي</h3><p>تم تنفيذ المشروع لإظهار الجانب العملي من مقررات الرياضيات (Math) في البرمجة؛ بدءًا من المتجهات والمصفوفات والتحويلات الهندسية، وصولًا إلى قياس المسافات وتحليل توزيع قطع الأثاث.</p></section>
+        <section class="lecture-panel"><span class="detail-index">02 / أساس علمي</span><h3>محاضرات مرتبطة بالمشروع</h3><div class="lecture-tags"><span>Vectors</span><span>Matrices</span><span>Determinants</span><span>Inverse of Matrix</span><span>Functions</span><span>Derivatives</span><span>Geometry &amp; Optimization</span></div><p class="technical-note">المتجهات والمصفوفات والمحددات تُستخدم مباشرةً في الإحداثيات والتحويلات. الدوال والمشتقات تُذكر ضمن الخلفية العلمية، وليست كلها متطلبات لازمة لكل وظيفة حالية.</p></section>
+        <section class="support-panel"><span class="detail-index">03 / إشراف ومتابعة</span><h3>الإشراف الفني</h3><div class="mentor"><span class="mentor-avatar">خ</span><div><strong>البشمهندس خالد</strong><small>إشراف ومتابعة</small></div></div><div class="mentor"><span class="mentor-avatar">م</span><div><strong>البشمهندسة منى جمعة</strong><small>إشراف ومتابعة</small></div></div></section>
+      </div>
+      <div class="academic-bottom"><span>© 2026 RoomGenius · مشروع جامعي تطبيقي</span><span>Designed &amp; Developed by <strong>Ahmed Farouk</strong></span><span>NVU · FC&amp;AI</span></div>
+    </div>
+  </footer>
+  <dialog id="reportDialog" class="report-dialog" aria-labelledby="reportTitle">
+    <div class="report-header"><div><span>ROOMGENIUS / PROJECT REPORT</span><h2 id="reportTitle">تقرير التصميم والتحليل</h2></div><button id="reportClose" type="button" aria-label="إغلاق التقرير">×</button></div>
+    <div id="reportContent" class="report-content"></div>
+    <div class="report-actions"><button type="button" id="printReportBtn" class="btn btn-primary">طباعة / حفظ PDF</button><button type="button" id="closeReportBtn" class="btn btn-light">إغلاق</button></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="confirmDialog" class="confirm-dialog"><div class="dialog-symbol">↺</div><h3 id="dialogTitle">بدء تصميم جديد؟</h3><p id="dialogText">سيتم استبدال التصميم الحالي.</p><div class="dialog-actions"><button id="dialogCancel" class="btn btn-light">إلغاء</button><button id="dialogAccept" class="btn btn-primary">تأكيد</button></div></dialog>
+</div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
+<script src="app.js" defer></script>
+<script type="module" src="js/scene3d.js"></script>
+<script src="js/studio.js" defer></script>
+<script src="js/insights.js" defer></script>
+<script src="js/enhancements.js" defer></script>
+</body>
+</html>
